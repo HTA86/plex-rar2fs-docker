@@ -2,7 +2,7 @@
 
 This container is based in large parts on disaster37/docker-plex. The goal is to have this container work just as the standard pms-docker with an additional /data-unrar folder where rar2fs does its magic.
 
-Probably needs to run priviliged as it uses fuse functions.
+Probably needs to run priviliged as it uses fuse functions..
 
 # Original readme for plexinc/pms-docker
 
