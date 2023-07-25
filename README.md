@@ -17,7 +17,7 @@ Before you create your container, you must decide on the type of networking you 
 - `macvlan`
 
 The `bridge` networking creates an entirely new network within the host and runs containers within there.  This network is connected to the physical network via an internal router and docker configures this router to forward certain ports through to the containers within.  The `host` networking uses the IP address of the host running docker such that a container's networking appears to be the host rather than separate.  The `macvlan` networking creates a new virtual computer on the network which is the container.  For purposes of setting up a plex container, the `host` and `macvlan` are very similar in configuration.
-
+ 
 Using `host` or `macvlan` is the easier of the three setups and has the fewest issues that need to be worked around.  However, some setups may be restricted to only running in the `bridge` mode.  Plex can be made to work in this mode, but it is more complicated.
 
 For those who use docker-compose, this repository provides the necessary YML template files to be modified for your own use.
