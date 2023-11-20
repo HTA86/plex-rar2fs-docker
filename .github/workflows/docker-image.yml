@@ -26,7 +26,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag fitzzz/plex-rar2fs:latest
 
-#     - uses: actions/checkout@v2
+#     - uses: actions/checkout@v2,
 #     - name: Tag the Docker image
 #       run: docker tag plex-rar2fs:$(date +%s) fitzzz/plex-rar2fs:$(date +%s)
     
