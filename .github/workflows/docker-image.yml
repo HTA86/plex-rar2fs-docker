@@ -29,7 +29,7 @@ jobs:
 #     - uses: actions/checkout@v2,
 #     - name: Tag the Docker image
 #       run: docker tag plex-rar2fs:$(date +%s) fitzzz/plex-rar2fs:$(date +%s)
-    
+# asd
     - uses: actions/checkout@v2
     - name: Push the Docker image
       run: docker push fitzzz/plex-rar2fs:latest
