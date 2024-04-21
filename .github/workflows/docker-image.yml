@@ -21,12 +21,12 @@ jobs:
           rm -rf ./* || true
           rm -rf ./.??* || true
 
-      - name: Cleanup Runner
-        run: |
-          docker stop $(docker ps -a -q)
-          docker rm $(docker ps -a -q)
-          docker rmi $(docker images -a -q)
-          docker volume rm $(docker volume ls -q)
+      # - name: Cleanup Runner
+      #   run: |
+      #     docker stop $(docker ps -a -q)
+      #     docker rm $(docker ps -a -q)
+      #     docker rmi $(docker images -a -q)
+      #     docker volume rm $(docker volume ls -q)
 
       - uses: actions/checkout@v2
       - name: Install Docker
