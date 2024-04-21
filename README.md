@@ -5,7 +5,7 @@ This container is based in large parts on disaster37/docker-plex. The goal is to
 Probably needs to run priviliged as it uses fuse functions...
 
 # Original readme for plexinc/pms-docker
-
+ 
 With our easy-to-install Plex Media Server software and your Plex apps, available on all your favorite phones, tablets, streaming devices, gaming consoles, and smart TVs, you can stream your video, music, and photo collections any time, anywhere, to any device.
  
 ## Usage
