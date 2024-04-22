@@ -12,8 +12,8 @@ jobs:
 
   build:
 
-    # runs-on: ubuntu-latest
-    runs-on: [self-hosted] 
+    runs-on: ubuntu-latest
+    # runs-on: [self-hosted] 
 
     steps:      
       # - name: Cleanup Workspace
@@ -28,14 +28,14 @@ jobs:
       #     docker rmi $(docker images -a -q)
       #     docker volume rm $(docker volume ls -q)
 
-      - uses: actions/checkout@v2
-      - name: Install Docker
-        run: |
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sudo sh ./get-docker.sh
+      #- uses: actions/checkout@v2
+      #- name: Install Docker
+      #  run: |
+      #    curl -fsSL https://get.docker.com -o get-docker.sh
+      #    sudo sh ./get-docker.sh
       
-      - name: Start Docker
-        run: sudo systemctl start docker
+      #- name: Start Docker
+      #  run: sudo systemctl start docker
 
       # - uses: actions/checkout@v2
       # - name: Docker Login
