@@ -14,13 +14,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - uses: actions/checkout@v2
 
-      - name: Logga in i GHCR
+      # Authenticate to GitHub Container Registry (GHCR)
+      - name: Log in to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Bygg Docker-image
-        run: docker build . --file Dockerfile --tag ghcr.io/${{ github.repository_owner }}/plex-rar2fs:plexpass
+      # Build the Docker image with lowercase username
+      - name: Build Docker image
+        run: |
+          USERNAME=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME=ghcr.io/$USERNAME/plex-rar2fs:plexpass
+          docker build . --file Dockerfile --tag $IMAGE_NAME
 
-      - name: Pusha Docker-image
-        run: docker push ghcr.io/${{ github.repository_owner }}/plex-rar2fs:plexpass
+      # Push the Docker image to GHCR
+      - name: Push Docker image
+        run: |
+          USERNAME=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME=ghcr.io/$USERNAME/plex-rar2fs:plexpass
+          docker push $IMAGE_NAME
