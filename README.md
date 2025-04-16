@@ -1,11 +1,46 @@
 # Docker container for the official Plex Media Server with added transparent rar support (rar2fs by hasse69)
 
 **Update:** This container now uses the `plexpass` tag of the base image `plexinc/pms-docker` to support Plex Pass features.  
-Make sure your Plex account has an active Plex Pass subscription to take full advantage of this.
+
 
 This container is based in large parts on disaster37/docker-plex. The goal is to have this container work just as the standard pms-docker with an additional /data-unrar folder where rar2fs does its magic.
 
-Probably needs to run priviliged as it uses fuse functions...
+
+## How to use
+
+You can pull and run this container from GitHub Container Registry using the following command:
+```bash
+docker pull ghcr.io/hta86/plex-rar2fs:plexpass
+```
+
+Or use it with Docker Compose:
+```yml
+services:
+  plex:
+    container_name: plex
+    restart: unless-stopped
+    image: ghcr.io/hta86/plex-rar2fs:plexpass
+    network_mode: host
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    privileged: true
+    devices:
+      - /dev/fuse
+    environment:
+      - TZ=Europe/Stockholm
+      - PLEX_CLAIM= # optional
+    volumes:
+      - ./config:/config
+      - /HD16TB:/data/HD_16TB
+      - /HD16TB2:/data/HD_16TB2
+```
+
+🔒 Note: The container needs to run with privileged: true because it uses FUSE (rar2fs).
+
+🔑 Plex Pass required: Make sure your Plex account has an active Plex Pass subscription.
+
+
 
 # Original readme for plexinc/pms-docker
  
