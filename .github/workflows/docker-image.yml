@@ -9,49 +9,17 @@ on:
     - cron: "0 22 * * *"
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-    # runs-on: [self-hosted] 
 
-    steps:      
-      # - name: Cleanup Workspace
-      #   run: |
-      #     rm -rf ./* || true
-      #     rm -rf ./.??* || true
-
-      # - name: Cleanup Runner
-      #   run: |
-      #     docker stop $(docker ps -a -q)
-      #     docker rm $(docker ps -a -q)
-      #     docker rmi $(docker images -a -q)
-      #     docker volume rm $(docker volume ls -q)
-
-      #- uses: actions/checkout@v2
-      #- name: Install Docker
-      #  run: |
-      #    curl -fsSL https://get.docker.com -o get-docker.sh
-      #    sudo sh ./get-docker.sh
-      
-      #- name: Start Docker
-      #  run: sudo systemctl start docker
-
+    steps:
       - uses: actions/checkout@v2
-      - name: Docker Login
-        env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-      - uses: actions/checkout@v2
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag fitzzz/plex-rar2fs:latest
+      - name: Logga in i GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-#     - uses: actions/checkout@v2,
-#     - name: Tag the Docker image
-#       run: docker tag plex-rar2fs:$(date +%s) fitzzz/plex-rar2fs:$(date +%s)
-# asd
-      - uses: actions/checkout@v2
-      - name: Push the Docker image
-        run: docker push fitzzz/plex-rar2fs:latest
+      - name: Bygg Docker-image
+        run: docker build . --file Dockerfile --tag ghcr.io/${{ github.repository_owner }}/plex-rar2fs:plexpass
+
+      - name: Pusha Docker-image
+        run: docker push ghcr.io/${{ github.repository_owner }}/plex-rar2fs:plexpass
